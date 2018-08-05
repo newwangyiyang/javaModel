@@ -36,11 +36,11 @@
             </tx:attributes>
         </tx:advice>
         <aop:config>
-            <aop:pointcut id="txPc" expression="execution(* cn.wang.service.impl.*serviceImpl.*(..))"></aop:pointcut>
+            <aop:pointcut id="txPc" expression="execution(* cn.wang.service.impl.*ServiceImpl.*(..))"></aop:pointcut>
             <aop:advisor advice-ref="txAdvice" pointcut-ref="txPc"></aop:advisor>
         </aop:config>
         <!--开启注解事物-->
-        <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+        <!--<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
 
         <!--开启注解注入-->
         <context:component-scan base-package="cn.wang"></context:component-scan>
@@ -58,10 +58,20 @@
         </bean>
         <bean name="customerService" class="cn.wang.service.impl.CustomerServiceImpl">
             <property name="customerDao" ref="customerDao"></property>
-        </bean>
+            <property name="baseDictDao" ref="baseDictDao"></property>
+         </bean>
         <bean name="customerAction" class="cn.wang.web.action.CustomerAction" scope="prototype">
             <property name="customerService" ref="customerService"></property>
         </bean>
 
+        <bean name="baseDictDao" class="cn.wang.dao.impl.BaseDictDaoImpl">
+            <property name="sessionFactory" ref="sessionFactory"></property>
+        </bean>
+        <bean name="baseDictService" class="cn.wang.service.impl.BaseDictServiceImpl">
+            <property name="baseDictDao" ref="baseDictDao"></property>
+        </bean>
+        <bean name="baseDictAction" class="cn.wang.web.action.BaseDictAction" scope="prototype">
+            <property name="baseDictService" ref="baseDictService"></property>
+        </bean>
 
 </beans>

@@ -6,6 +6,7 @@
 <struts>
 
 	<constant name="struts.objectFactory" value="spring"></constant>
+    <constant name="struts.devMode" value="true"></constant>
 
 	<package name="crm" namespace="/" extends="struts-default" >
 		<action name="UserAction_*" class="userAction" method="{1}" >
@@ -14,6 +15,7 @@
 		<action name="customerAction_*" class="customerAction" method="{1}">
 			<result name="success">/index.jsp</result>
 		</action>
+        <action name="baseDictAction" class="baseDictAction" method="execute"></action>
 	</package>
 
 </struts>

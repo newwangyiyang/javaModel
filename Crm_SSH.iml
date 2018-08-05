@@ -388,5 +388,27 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/java工具类/GSON完整包/gson-2.2.4.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://E:/java工具类/GSON完整包/gson-2.2.4-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://E:/java工具类/GSON完整包/gson-2.2.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/apache-tomcat-7.0.72/lib/servlet-api.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

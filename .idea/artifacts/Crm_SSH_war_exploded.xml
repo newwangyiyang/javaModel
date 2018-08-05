@@ -49,6 +49,8 @@
           <element id="file-copy" path="E:/java工具类/SSH需要的所有jar包/struts2-core-2.3.24.jar" />
           <element id="file-copy" path="E:/java工具类/SSH需要的所有jar包/struts2-spring-plugin-2.3.24.jar" />
           <element id="file-copy" path="E:/java工具类/SSH需要的所有jar包/xwork-core-2.3.24.jar" />
+          <element id="file-copy" path="E:/java工具类/GSON完整包/gson-2.2.4.jar" />
+          <element id="file-copy" path="E:/apache-tomcat-7.0.72/lib/servlet-api.jar" />
         </element>
       </element>
     </root>

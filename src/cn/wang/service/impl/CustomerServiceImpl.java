@@ -1,6 +1,8 @@
 package cn.wang.service.impl;
 
+import cn.wang.dao.BaseDictDao;
 import cn.wang.dao.CustomerDao;
+import cn.wang.domain.BaseDict;
 import cn.wang.domain.Customer;
 import cn.wang.service.CustomerService;
 import cn.wang.utils.PageBean;
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
     private CustomerDao customerDao;
+    private BaseDictDao baseDictDao;
     @Override
     public PageBean getPageBean(DetachedCriteria detachedCriteria, Integer currentPage, Integer pageSize) {
         //1、得到总记录数
@@ -23,11 +26,24 @@ public class CustomerServiceImpl implements CustomerService {
         return pageBean;
     }
 
+    @Override
+    public void saveCustomer(Customer customer) {
+        customerDao.save(customer);
+    }
+
     public CustomerDao getCustomerDao() {
         return customerDao;
     }
 
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
+    }
+
+    public BaseDictDao getBaseDictDao() {
+        return baseDictDao;
+    }
+
+    public void setBaseDictDao(BaseDictDao baseDictDao) {
+        this.baseDictDao = baseDictDao;
     }
 }
