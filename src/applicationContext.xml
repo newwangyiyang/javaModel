@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop" 
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd 
+							http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd 
+							http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
+	    <!--配置hibernate-->
+        <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"></bean>
+
+        <bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+            <property name="dataSource" ref="dataSource"></property>
+            <property name="hibernateProperties">
+                <props>
+                    <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                    <prop key="hibernate.show_sql">true</prop>
+                    <prop key="hibernate.format_sql">true</prop>
+                    <prop key="hibernate.hbm2ddl.auto">update</prop>
+                </props>
+            </property>
+            <property name="mappingDirectoryLocations" value="classpath:cn/wang/domain"> </property>
+        </bean>
+        <!--配置事物-->
+        <bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+            <property name="sessionFactory" ref="sessionFactory"></property>
+        </bean>
+        <tx:advice id="txAdvice" transaction-manager="transactionManager">
+            <tx:attributes>
+                <tx:method name="save*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+                <tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+                <tx:method name="get*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+                <tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+            </tx:attributes>
+        </tx:advice>
+        <aop:config>
+            <aop:pointcut id="txPc" expression="execution(* cn.wang.service.impl.*serviceImpl.*(..))"></aop:pointcut>
+            <aop:advisor advice-ref="txAdvice" pointcut-ref="txPc"></aop:advisor>
+        </aop:config>
+        <!--开启注解事物-->
+        <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
+        <!--开启注解注入-->
+        <context:component-scan base-package="cn.wang"></context:component-scan>
+
+        <!--&lt;!&ndash;配置struts&ndash;&gt;-->
+		<!--<bean name="userAction" class="cn.wang.web.action.UserAction" scope="prototype">-->
+			<!--<property name="userService" ref="userService"></property>-->
+		<!--</bean>-->
+		<!--<bean name="userService" class="cn.wang.service.impl.UserServiceImpl">-->
+
+		<!--</bean>-->
+
+        <bean name="customerDao" class="cn.wang.dao.impl.CustomerDaoImpl">
+            <property name="sessionFactory" ref="sessionFactory"></property>
+        </bean>
+        <bean name="customerService" class="cn.wang.service.impl.CustomerServiceImpl">
+            <property name="customerDao" ref="customerDao"></property>
+        </bean>
+        <bean name="customerAction" class="cn.wang.web.action.CustomerAction" scope="prototype">
+            <property name="customerService" ref="customerService"></property>
+        </bean>
+
+
+</beans>
