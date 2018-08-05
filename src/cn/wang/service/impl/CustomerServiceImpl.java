@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
         //2、得到PageBean对象
         PageBean pageBean = new PageBean(currentPage, pageSize, totalCount);
         //3、取得list<Customer>
-        List<Customer> list = customerDao.getCustomerListByName(detachedCriteria, pageBean.getStart(), pageSize);
+        List<Customer> list = customerDao.getPageList(detachedCriteria, pageBean.getStart(), pageSize);
 
         pageBean.setList(list);
         return pageBean;
