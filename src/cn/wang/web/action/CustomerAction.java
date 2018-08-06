@@ -5,6 +5,8 @@ import cn.wang.domain.Customer;
 import cn.wang.service.BaseDictService;
 import cn.wang.service.CustomerService;
 import cn.wang.utils.PageBean;
+import com.google.gson.Gson;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.commons.lang3.StringUtils;
@@ -12,37 +14,44 @@ import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 public class CustomerAction extends ActionSupport implements ModelDriven<Customer> {
     private Customer customer = new Customer();
 
-    private String cust_source;
+    private String custSourceId;
     private Integer currentPage;
     private Integer pageSize;
 
     private CustomerService customerService;
 
-    public String list() {
+    public String list() throws IOException {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Customer.class);
-        System.out.println(customer);
+//        System.out.println(customer);
         if(StringUtils.isNotBlank(customer.getCust_name())) {
             detachedCriteria.add(Restrictions.like("cust_name", "%" + customer.getCust_name() + "%"));
         }
         PageBean pageBean = customerService.getPageBean(detachedCriteria, currentPage, pageSize);
-
-        System.out.println(pageBean.getTotalCount());
-        System.out.println(pageBean.getList());
-        return SUCCESS;
+        Gson gson = new Gson();
+        String json = gson.toJson(pageBean.getList()).toString();
+        ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+        ServletActionContext.getResponse().getWriter().write(json);
+        return null;
     }
 
     public String save() throws Exception {
         //问题关键点
-        System.out.println(cust_source);
+//        System.out.println(cust_source);
         /********************************************/
         ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
         customerService.saveCustomer(customer);
         ServletActionContext.getResponse().getWriter().write("添加成功");
+        return null;
+    }
+
+    public String saveOrUpdate() {
+        customerService.saveOrUpdate(customer);
         return null;
     }
 
@@ -83,12 +92,11 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
         this.customer = customer;
     }
 
-    public String getCust_source() {
-        return cust_source;
+    public String getCustSourceId() {
+        return custSourceId;
     }
 
-    public void setCust_source(String cust_source) {
-        this.cust_source = cust_source;
+    public void setCustSourceId(String custSourceId) {
+        this.custSourceId = custSourceId;
     }
-
 }

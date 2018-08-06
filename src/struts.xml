@@ -16,6 +16,8 @@
 			<result name="success">/index.jsp</result>
 		</action>
         <action name="baseDictAction" class="baseDictAction" method="execute"></action>
+		<action name="fileAction" class="fileAction" method="uploadFile"></action>
+		<action name="linkManAction_*" class="LinkManAction" method="{1}"></action>
 	</package>
 
 </struts>

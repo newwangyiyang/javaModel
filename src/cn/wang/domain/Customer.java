@@ -1,5 +1,8 @@
 package cn.wang.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Customer {
 	private Long cust_id;
 	
@@ -11,6 +14,7 @@ public class Customer {
 	private String cust_linkman;
 	private String cust_phone;
 	private String cust_mobile;
+	private Set<LinkMan> set = new HashSet<>();
 
 	public BaseDict getCust_source() {
 		return cust_source;
@@ -67,6 +71,13 @@ public class Customer {
 		this.cust_mobile = cust_mobile;
 	}
 
+	public Set<LinkMan> getSet() {
+		return set;
+	}
+
+	public void setSet(Set<LinkMan> set) {
+		this.set = set;
+	}
 
 	@Override
 	public String toString() {

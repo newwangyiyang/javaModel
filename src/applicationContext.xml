@@ -74,4 +74,17 @@
             <property name="baseDictService" ref="baseDictService"></property>
         </bean>
 
+
+        <bean name="fileAction" class="cn.wang.web.action.FileAction" scope="prototype"></bean>
+
+        <bean name="LinkManDao" class="cn.wang.dao.impl.LinkManDaoImpl">
+            <property name="sessionFactory" ref="sessionFactory"></property>
+        </bean>
+        <bean name="LinkManService" class="cn.wang.service.impl.LinkManServiceImpl">
+            <property name="customerDao" ref="customerDao"></property>
+            <property name="linkManDao" ref="LinkManDao"></property>
+        </bean>
+        <bean name="LinkManAction" class="cn.wang.web.action.LinkManAction" scope="prototype">
+            <property name="linkManService" ref="LinkManService"></property>
+        </bean>
 </beans>

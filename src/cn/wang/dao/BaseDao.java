@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 
 public interface BaseDao<T> {
+	//更新或者新增---只负责传递对象，hibernate会自动去判断是更新还是新增
+	void saveOrUpdate(T t);
 	//增
 	void save(T t);
 	//删

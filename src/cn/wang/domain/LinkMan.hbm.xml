@@ -15,7 +15,6 @@
 		<property name="lkm_mobile"  ></property>
 		<property name="lkm_memo"  ></property>
 		<property name="lkm_position"  ></property>
-		<many-to-one name="customer" column="lkm_cust_id" class="Customer"  >
-		</many-to-one>
+		<many-to-one name="customer" column="lkm_cust_id" class="Customer"></many-to-one>
 	</class>
 </hibernate-mapping>
