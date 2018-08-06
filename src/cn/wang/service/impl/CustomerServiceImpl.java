@@ -30,7 +30,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void saveCustomer(Customer customer) {
         customerDao.save(customer);
     }
-
+    public Customer getById(Long id) {
+        return customerDao.getById(id);
+    }
     @Override
     public void saveOrUpdate(Customer customer) {
         customerDao.saveOrUpdate(customer);

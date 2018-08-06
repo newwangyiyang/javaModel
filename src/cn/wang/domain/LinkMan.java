@@ -27,7 +27,17 @@ public class LinkMan {
 	private String lkm_mobile;
 	private String lkm_memo;
 	private String lkm_position;
-	
+
+	private String lkm_cust_id;
+
+	public String getLkm_cust_id() {
+		return lkm_cust_id;
+	}
+
+	public void setLkm_cust_id(String lkm_cust_id) {
+		this.lkm_cust_id = lkm_cust_id;
+	}
+
 	//表达多对一关系
 	private Customer customer ;
 	

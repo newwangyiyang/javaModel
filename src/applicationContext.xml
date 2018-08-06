@@ -86,5 +86,6 @@
         </bean>
         <bean name="LinkManAction" class="cn.wang.web.action.LinkManAction" scope="prototype">
             <property name="linkManService" ref="LinkManService"></property>
+            <property name="customerService" ref="customerService"></property>
         </bean>
 </beans>
