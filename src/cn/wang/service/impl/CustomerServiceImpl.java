@@ -33,6 +33,13 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getById(Long id) {
         return customerDao.getById(id);
     }
+
+    @Override
+    public List industryCount() {
+        List list = customerDao.industryCount();
+        return list;
+    }
+
     @Override
     public void saveOrUpdate(Customer customer) {
         customerDao.saveOrUpdate(customer);

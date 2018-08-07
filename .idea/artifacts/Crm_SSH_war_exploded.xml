@@ -93,6 +93,8 @@
           <element id="file-copy" path="E:/java的常用工具收集/SSH3大框架所需所有jar包/struts2-spring-plugin-2.3.24.jar" />
           <element id="file-copy" path="E:/java的常用工具收集/SSH3大框架所需所有jar包/xwork-core-2.3.24.jar" />
           <element id="file-copy" path="E:/java的常用工具收集/json解析/GSON完整包/gson-2.2.4.jar" />
+          <element id="library" level="module" name="JUnit4" module-name="Crm_SSH" />
+          <element id="file-copy" path="E:/java工具类/fastJson转json/fastjson-1.2.8.jar" />
         </element>
       </element>
     </root>

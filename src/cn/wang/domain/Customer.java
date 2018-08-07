@@ -1,5 +1,7 @@
 package cn.wang.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +9,6 @@ public class Customer {
 	private Long cust_id;
 	
 	private String cust_name;
-
 	private BaseDict cust_source;
 	private BaseDict cust_industry;
 	private BaseDict cust_level;

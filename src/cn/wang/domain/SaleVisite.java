@@ -1,5 +1,7 @@
 package cn.wang.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class SaleVisite {
 //    `visit_id` varchar(32) NOT NULL,
 //  `visit_cust_id` bigint(32) DEFAULT NULL COMMENT '客户id',
@@ -16,6 +18,8 @@ public class SaleVisite {
     private String visit_detail;
     private String visit_nexttime;
 
+
+    @JSONField(serialize = false)
     private Customer customer;
     private User user;
 

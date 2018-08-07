@@ -1,4 +1,7 @@
 package cn.wang.domain;
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 //联系人实体
 public class LinkMan {
 		/*
@@ -39,6 +42,7 @@ public class LinkMan {
 	}
 
 	//表达多对一关系
+	@JSONField(serialize = false)
 	private Customer customer ;
 	
 	//----------------------------------------------

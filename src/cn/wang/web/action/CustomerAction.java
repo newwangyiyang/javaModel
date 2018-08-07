@@ -5,6 +5,8 @@ import cn.wang.domain.Customer;
 import cn.wang.service.BaseDictService;
 import cn.wang.service.CustomerService;
 import cn.wang.utils.PageBean;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,6 +18,7 @@ import org.hibernate.criterion.Restrictions;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 public class CustomerAction extends ActionSupport implements ModelDriven<Customer> {
     private Customer customer = new Customer();
@@ -28,13 +31,13 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 
     public String list() throws IOException {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Customer.class);
-//        System.out.println(customer);
         if(StringUtils.isNotBlank(customer.getCust_name())) {
             detachedCriteria.add(Restrictions.like("cust_name", "%" + customer.getCust_name() + "%"));
         }
         PageBean pageBean = customerService.getPageBean(detachedCriteria, currentPage, pageSize);
-        Gson gson = new Gson();
-        String json = gson.toJson(pageBean.getList()).toString();
+
+
+        String json = JSON.toJSONString(pageBean.getList(), SerializerFeature.DisableCircularReferenceDetect);
         ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
         ServletActionContext.getResponse().getWriter().write(json);
         return null;
@@ -47,6 +50,15 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
         ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
         customerService.saveCustomer(customer);
         ServletActionContext.getResponse().getWriter().write("添加成功");
+        return null;
+    }
+
+    public String industryCount() throws IOException {
+        List list = customerService.industryCount();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+        ServletActionContext.getResponse().getWriter().write(json);
         return null;
     }
 
