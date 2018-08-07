@@ -19,5 +19,10 @@
 			<key column="lkm_cust_id"></key>
 			<one-to-many class="LinkMan"></one-to-many>
 		</set>
+
+		<set name="saleVisiteSet">
+			<key column="visit_cust_id"></key>
+			<one-to-many class="SaleVisite"></one-to-many>
+		</set>
 	</class>
 </hibernate-mapping>

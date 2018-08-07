@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns="http://www.springframework.org/schema/beans" 
+		xmlns="http://www.springframework.org/schema/beans"
 		xmlns:context="http://www.springframework.org/schema/context"
-		xmlns:aop="http://www.springframework.org/schema/aop" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
 		xmlns:tx="http://www.springframework.org/schema/tx"
-		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd 
 							http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd 
 							http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
@@ -87,5 +87,27 @@
         <bean name="LinkManAction" class="cn.wang.web.action.LinkManAction" scope="prototype">
             <property name="linkManService" ref="LinkManService"></property>
             <property name="customerService" ref="customerService"></property>
+        </bean>
+
+
+        <bean name="saleVisiteDao" class="cn.wang.dao.impl.SaleVisiteDaoImpl">
+            <property name="sessionFactory" ref="sessionFactory"></property>
+        </bean>
+        <bean name="saleVisiteService" class="cn.wang.service.impl.SaleVisiteServiceImpl">
+            <property name="saleVisiteDao" ref="saleVisiteDao"></property>
+        </bean>
+        <bean name="saleVisiteAction" class="cn.wang.web.action.SaleVisiteAction" scope="prototype">
+            <property name="saleVisiteService" ref="saleVisiteService"></property>
+        </bean>
+
+
+        <bean name="userDao" class="cn.wang.dao.impl.UserDaoImpl">
+            <property name="sessionFactory" ref="sessionFactory"></property>
+        </bean>
+        <bean name="userService" class="cn.wang.service.impl.UserServiceImpl">
+            <property name="userDao" ref="userDao"></property>
+        </bean>
+        <bean name="userAction" class="cn.wang.web.action.UserAction" scope="prototype">
+            <property name="userService" ref="userService"></property>
         </bean>
 </beans>

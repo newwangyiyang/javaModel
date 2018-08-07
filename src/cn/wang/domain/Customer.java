@@ -15,6 +15,7 @@ public class Customer {
 	private String cust_phone;
 	private String cust_mobile;
 	private Set<LinkMan> set = new HashSet<>();
+	private Set<SaleVisite> saleVisiteSet = new HashSet<>();
 
 	public BaseDict getCust_source() {
 		return cust_source;
@@ -75,8 +76,18 @@ public class Customer {
 		return set;
 	}
 
+
+
 	public void setSet(Set<LinkMan> set) {
 		this.set = set;
+	}
+
+	public Set<SaleVisite> getSaleVisiteSet() {
+		return saleVisiteSet;
+	}
+
+	public void setSaleVisiteSet(Set<SaleVisite> saleVisiteSet) {
+		this.saleVisiteSet = saleVisiteSet;
 	}
 
 	@Override
